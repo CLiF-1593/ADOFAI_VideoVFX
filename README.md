@@ -15,7 +15,7 @@ Please indicate the source when using this program.
 Copyright(C) 2023 by CLiF   
       
         
-## !! Regulations : 이용 규정 !!"     
+## !! Regulations : 이용 규정 !!     
 > 타인의 영상 및 저작물을 허락 없이 다운로드 하여 활용하는 것은 금물입니다.     
 > 반드시 자신이 녹화한 영상 혹은 영상 및 맵 저작자가 허가한 맵 영상만을 활용해야 합니다.     
 > 활용한 영상의 출처를 반드시 표기해야하며, 이를 위반하여 생기는 모든 책임은 이용자에게 있습니다.      
