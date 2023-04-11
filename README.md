@@ -14,6 +14,7 @@ Please indicate the source when using this program.
    
 Copyright(C) 2023 by CLiF   
       
+- - -
         
 ## !! Regulations : 이용 규정 !!     
 > 타인의 영상 및 저작물을 허락 없이 다운로드 하여 활용하는 것은 금물입니다.     
