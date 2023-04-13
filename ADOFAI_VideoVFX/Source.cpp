@@ -10,8 +10,21 @@
 #include <opencv2/core/utils/logger.hpp>
 using namespace std;
 
+extern "C" {
+#include <libswscale\swscale.h>
+#include <libavformat\avformat.h>
+#include <libavformat\avio.h>
+#include <libavcodec\avcodec.h>
+
+#pragma comment (lib, "avcodec.lib")
+#pragma comment (lib, "avformat.lib")
+#pragma comment (lib, "avutil.lib")
+#pragma comment (lib, "swscale.lib")
+}
+
 int main() {
 	cv::utils::logging::setLogLevel(cv::utils::logging::LogLevel::LOG_LEVEL_SILENT);
+	av_log_set_level(AV_LOG_QUIET);
 	//SetConsoleOutputCP(CP_UTF8);
 	//SetConsoleCP(CP_UTF8);
 
@@ -59,6 +72,7 @@ int main() {
 		goto ERR_VIDEO_SELECTION;
 	}
 	cout << "> Path : " << video_path << endl  << endl;
+	ImageProcessing::ReadVideo(video_path);
 
 	cout << "< Choose the ADOFAI File - 얼불춤 파일 선택 >" << endl;
 	ERR_ADOFAI_FILE_SELECTION:
@@ -78,22 +92,22 @@ int main() {
 	ReadJson(adofai_path, adofai);
 
 	cout << "< First Frame - 첫 프레임 선택 >" << endl;
-	int begin_frame = GetFrame(video_path, "First Frame", "Choose the first frame of the video that you want to edit.", 1);
+	int begin_frame = ImageProcessing::GetFrame(video_path, "First Frame", "Choose the first frame of the video that you want to edit.", 1);
 	cout << "> Frist Frame : " << begin_frame << endl << endl;
 
 	cout << "< Game Start Frame - 게임 시작 프레임 선택 >" << endl;
-	int game_start_frame = GetFrame(video_path, "Game Start Frame", "Choose the PRECISE frame that game start.", 1);
+	int game_start_frame = ImageProcessing::GetFrame(video_path, "Game Start Frame", "Choose the PRECISE frame that game start.", 1);
 	cout << "> Game Start Frame : " << game_start_frame << endl << endl;
 
 	cout << "< Last Frame - 마지막 프레임 선택 >" << endl;
-	int end_frame = GetFrame(video_path, "Last Frame", "Choose the last frame of the video that you want to edit.", -1);
+	int end_frame = ImageProcessing::GetFrame(video_path, "Last Frame", "Choose the last frame of the video that you want to edit.", -1);
 	cout << "> Last Frame : " << end_frame << endl << endl;
 
 	cout << "< Generating >" << endl << endl;
 
 	cout << "> Saving the Video . . ." << endl;
 	string vfx_video_path = folder_path + "[VideoVFX] videodat.mp4";
-	SaveVideo(vfx_video_path, video_path, begin_frame, end_frame);
+	ImageProcessing::SaveVideo(video_path, vfx_video_path, begin_frame, end_frame);
 	
 	cout << "> Setting ADOFAI File . . ." << endl;
 
@@ -120,7 +134,7 @@ int main() {
 
 	// Set Video
 	double delta_frame = game_start_frame - begin_frame;
-	double time_interval = delta_frame / GetFPS(video_path) * 1000;
+	double time_interval = delta_frame / ImageProcessing::video_fps * 1000;
 	vfx_adofai["settings"]["bgVideo"] = vfx_video_path;
 	vfx_adofai["settings"]["vidOffset"] = int(time_interval);
 	vfx_adofai["settings"]["showDefaultBGIfNoImage"] = "Disabled";
