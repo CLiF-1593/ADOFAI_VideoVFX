@@ -1122,7 +1122,7 @@ typedef struct AVFormatContext {
      *
      * Muxing only, must be set by the caller before avformat_write_header().
      */
-    const struct AVOutputFormat *oformat;
+    struct AVOutputFormat *oformat;
 
     /**
      * Format private data. This is an AVOptions-enabled struct

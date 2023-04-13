@@ -8,23 +8,9 @@
 #include "ImageProcessing.h"
 #include "EventJson.h"
 #include <opencv2/core/utils/logger.hpp>
-using namespace std;
-
-extern "C" {
-#include <libswscale\swscale.h>
-#include <libavformat\avformat.h>
-#include <libavformat\avio.h>
-#include <libavcodec\avcodec.h>
-
-#pragma comment (lib, "avcodec.lib")
-#pragma comment (lib, "avformat.lib")
-#pragma comment (lib, "avutil.lib")
-#pragma comment (lib, "swscale.lib")
-}
 
 int main() {
 	cv::utils::logging::setLogLevel(cv::utils::logging::LogLevel::LOG_LEVEL_SILENT);
-	av_log_set_level(AV_LOG_QUIET);
 	//SetConsoleOutputCP(CP_UTF8);
 	//SetConsoleCP(CP_UTF8);
 
@@ -106,8 +92,13 @@ int main() {
 	cout << "< Generating >" << endl << endl;
 
 	cout << "> Saving the Video . . ." << endl;
-	string vfx_video_path = folder_path + "[VideoVFX] videodat.mp4";
+	string vfx_video_path = folder_path + "[VideoVFX] tmp.mp4";
 	ImageProcessing::SaveVideo(video_path, vfx_video_path, begin_frame, end_frame);
+
+	cout << "> Compressing the Video . . ." << endl;
+	string vfx_final_video_path = folder_path + "[VideoVFX] video.mp4";
+	ImageProcessing::ConvertBitrate(vfx_video_path, vfx_final_video_path, "5500k", "6500k");
+	filesystem::remove(vfx_video_path);
 	
 	cout << "> Setting ADOFAI File . . ." << endl;
 
@@ -135,7 +126,7 @@ int main() {
 	// Set Video
 	double delta_frame = game_start_frame - begin_frame;
 	double time_interval = delta_frame / ImageProcessing::video_fps * 1000;
-	vfx_adofai["settings"]["bgVideo"] = vfx_video_path;
+	vfx_adofai["settings"]["bgVideo"] = vfx_final_video_path;
 	vfx_adofai["settings"]["vidOffset"] = int(time_interval);
 	vfx_adofai["settings"]["showDefaultBGIfNoImage"] = "Disabled";
 

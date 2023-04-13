@@ -41,11 +41,14 @@ namespace ImageProcessing {
         int percent = -1;
 
         cap.set(CAP_PROP_POS_FRAMES, begin_frame);
+        video.set(VIDEOWRITER_PROP_QUALITY, 10);
         
         for (int i = begin_frame; i <= end_frame; i++) {
             int new_percent = (i - begin_frame) * 10000 / (end_frame - begin_frame);
             if (percent < new_percent) {
                 percent = new_percent;
+                gotoxy(0, 23);
+                cout << "                  ";
                 gotoxy(0, 23);
                 std::cout << "> Progress : " << (double)percent / 100.0 << "%";
             }
@@ -55,6 +58,19 @@ namespace ImageProcessing {
         }
         std::cout << endl;
         video.release();
+    }
+
+    void ConvertBitrate(const string src_path, const string save_path, const string bitrate, const string max_bitrate) {
+        string command = "ffmpeg -i \"" + src_path + "\" -b:v " + bitrate + " -preset fast -maxrate " + max_bitrate + " -bufsize 2000k \"" + save_path + "\"";
+        FILE* fp = _popen(command.c_str(), "r");
+        char  buff[1024];
+        while (fgets(buff, 1024, fp)) {
+            if (buff[0] == 'f' && buff[1] == 'r' && buff[2] == 'a'&& buff[3] == 'm' && buff[4] == 'e' && buff[5] == '=') {
+                printf("%s", buff);
+            }
+        }
+            
+        _pclose(fp);
     }
 
     
@@ -231,7 +247,10 @@ namespace ImageProcessing {
         }
 
         frame_container_manager.join();
+        cap.release();
         cv::destroyWindow(title);
+        system("cls");
+        cout << buffer;
         for (int i = 0; i < video_frames.size(); i++) {
             if (video_frames[i]) {
                 delete video_frames[i];
@@ -239,10 +258,6 @@ namespace ImageProcessing {
             }
         }
         video_frames.clear();
-        cap.release();
-
-        system("cls");
-        cout << buffer;
         return (int)cur_frame;
     }
 }
