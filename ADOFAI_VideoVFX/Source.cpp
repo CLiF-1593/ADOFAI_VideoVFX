@@ -8,6 +8,7 @@
 #include "ImageProcessing.h"
 #include "EventJson.h"
 #include <opencv2/core/utils/logger.hpp>
+#include <Windows.h>
 
 int main() {
 	cv::utils::logging::setLogLevel(cv::utils::logging::LogLevel::LOG_LEVEL_SILENT);
@@ -88,6 +89,18 @@ int main() {
 	cout << "< Last Frame - 마지막 프레임 선택 >" << endl;
 	int end_frame = ImageProcessing::GetFrame(video_path, "Last Frame", "Choose the last frame of the video that you want to edit.", -1);
 	cout << "> Last Frame : " << end_frame << endl << endl;
+	
+	cout << "< Playback Speed - 영상 배속 >" << endl;
+	double pitch = 0.0;
+	ERR_PITCH:
+	cout << "> Speed (ex 1.0, 2.5, 0.5) : ";
+	cin >> pitch;
+	if (pitch <= 0 || cin.fail()) {
+		cin.clear();
+		cin.ignore(100000, '\n');
+		cout << "> The Number of Repetitions is out of the range. - 잘못된 입력 (범위 넘어감)" << endl;
+		goto ERR_PITCH;
+	}
 
 	cout << "< Generating >" << endl << endl;
 
@@ -97,7 +110,7 @@ int main() {
 
 	cout << "> Compressing the Video . . ." << endl;
 	string vfx_final_video_path = folder_path + "[VideoVFX] video.mp4";
-	ImageProcessing::ConvertBitrate(vfx_video_path, vfx_final_video_path, "5500k", "6500k");
+	ImageProcessing::ConvertBitrate(vfx_video_path, vfx_final_video_path, "5500k", "6500k", pitch);
 	filesystem::remove(vfx_video_path);
 	
 	cout << "> Setting ADOFAI File . . ." << endl;

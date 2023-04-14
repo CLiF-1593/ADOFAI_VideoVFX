@@ -47,9 +47,9 @@ namespace ImageProcessing {
             int new_percent = (i - begin_frame) * 10000 / (end_frame - begin_frame);
             if (percent < new_percent) {
                 percent = new_percent;
-                gotoxy(0, 23);
+                gotoxy(0, 25);
                 cout << "                  ";
-                gotoxy(0, 23);
+                gotoxy(0, 25);
                 std::cout << "> Progress : " << (double)percent / 100.0 << "%";
             }
             cv::Mat frame;
@@ -60,17 +60,9 @@ namespace ImageProcessing {
         video.release();
     }
 
-    void ConvertBitrate(const string src_path, const string save_path, const string bitrate, const string max_bitrate) {
-        string command = "ffmpeg -i \"" + src_path + "\" -b:v " + bitrate + " -preset fast -maxrate " + max_bitrate + " -bufsize 2000k \"" + save_path + "\"";
-        FILE* fp = _popen(command.c_str(), "r");
-        char  buff[1024];
-        while (fgets(buff, 1024, fp)) {
-            if (buff[0] == 'f' && buff[1] == 'r' && buff[2] == 'a'&& buff[3] == 'm' && buff[4] == 'e' && buff[5] == '=') {
-                printf("%s", buff);
-            }
-        }
-            
-        _pclose(fp);
+    void ConvertBitrate(const string src_path, const string save_path, const string bitrate, const string max_bitrate, double pitch) {
+        string command = "ffmpeg -v quiet -stats -y -i \"" + src_path + "\" -b:v " + bitrate + " -preset fast -maxrate " + max_bitrate + " -vf \"setpts = " + to_string(1 / pitch) + " * PTS\"" + " -bufsize 2000k \"" + save_path + "\"";
+        system(command.c_str());
     }
 
     

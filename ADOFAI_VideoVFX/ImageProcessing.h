@@ -12,6 +12,6 @@ namespace ImageProcessing {
 
     void ReadVideo(const std::string src_path);
 	void SaveVideo(const std::string src_path, const std::string save_path, const int begin_frame, const int end_frame);
-    void ConvertBitrate(const std::string src_path, const std::string save_path, const std::string bitrate, const std::string max_bitrate);
+    void ConvertBitrate(const std::string src_path, const std::string save_path, const std::string bitrate, const std::string max_bitrate, double pitch);
     int GetFrame(const std::string src_path, const std::string title, const std::string description, const int begin_pos);
 };
