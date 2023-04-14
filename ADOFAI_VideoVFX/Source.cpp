@@ -101,6 +101,7 @@ int main() {
 		cout << "> The Number of Repetitions is out of the range. - 잘못된 입력 (범위 넘어감)" << endl;
 		goto ERR_PITCH;
 	}
+	cout << endl << endl;
 
 	cout << "< Generating >" << endl << endl;
 

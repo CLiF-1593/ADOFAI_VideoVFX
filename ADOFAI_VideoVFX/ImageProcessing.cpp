@@ -47,9 +47,9 @@ namespace ImageProcessing {
             int new_percent = (i - begin_frame) * 10000 / (end_frame - begin_frame);
             if (percent < new_percent) {
                 percent = new_percent;
-                gotoxy(0, 25);
+                gotoxy(0, 27);
                 cout << "                  ";
-                gotoxy(0, 25);
+                gotoxy(0, 27);
                 std::cout << "> Progress : " << (double)percent / 100.0 << "%";
             }
             cv::Mat frame;
@@ -165,7 +165,7 @@ namespace ImageProcessing {
                     if (!video_frames[i]) {
                         resize(frame, frame, Size(960, 540));
                         {
-                            cv::Mat roi = frame(Rect(0, 0, 960, 100));
+                            cv::Mat roi = frame(Rect(0, 0, 960, 130));
                             cv::Mat color(roi.size(), CV_8UC3, cv::Scalar(0, 0, 0));
                             double alpha = 0.6;
                             cv::addWeighted(color, alpha, roi, 1.0 - alpha, 0.0, roi);
@@ -186,7 +186,8 @@ namespace ImageProcessing {
                         putText(frame, title, Point(10, 25), 2, 0.8, Scalar::all(255), 1, LINE_AA);
                         putText(frame, description, Point(10, 50), 2, 0.4, Scalar::all(255), 1, LINE_AA);
                         putText(frame, "Press the Left or Right Arrow keys or Drag the Mouse to move the frames", Point(10, 70), 2, 0.4, Scalar::all(200), 1, LINE_AA);
-                        putText(frame, "Frame Number : " + to_string(i), Point(10, 90), 2, 0.4, Scalar::all(200), 1, LINE_AA);
+                        putText(frame, "Press Space Key to select the frame", Point(10, 90), 2, 0.4, Scalar::all(200), 1, LINE_AA);
+                        putText(frame, "Frame Number : " + to_string(i), Point(10, 110), 2, 0.4, Scalar::all(200), 1, LINE_AA);
 
                         video_frames[i] = new cv::Mat();
                         *(video_frames[i]) = frame;
