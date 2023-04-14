@@ -61,7 +61,7 @@ namespace ImageProcessing {
     }
 
     void ConvertBitrate(const string src_path, const string save_path, const string bitrate, const string max_bitrate, double pitch) {
-        string command = "ffmpeg -v quiet -stats -y -i \"" + src_path + "\" -b:v " + bitrate + " -preset fast -maxrate " + max_bitrate + " -vf \"setpts = " + to_string(1 / pitch) + " * PTS\"" + " -bufsize 2000k \"" + save_path + "\"";
+        string command = "ffmpeg -hide_banner -v error -stats -y -i \"" + src_path + "\" -b:v " + bitrate + " -preset fast -maxrate " + max_bitrate + " -vf \"setpts = " + to_string(1 / pitch) + " * PTS\"" + " -bufsize 2000k \"" + save_path + "\"";
         system(command.c_str());
     }
 
