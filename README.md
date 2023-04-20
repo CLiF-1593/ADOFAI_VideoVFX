@@ -7,7 +7,7 @@
 If you find an error or want to request an additional function, please contact by Discord DM.   
 (CLiF [클리프] #8404)   
 
-#### How to use : X   
+#### How to use : https://youtu.be/rX-034dQaiE   
    
 프로그램 사용 시 출처를 밝혀주세요.   
 Please indicate the source when using this program.   
