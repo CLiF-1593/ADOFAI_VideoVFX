@@ -32,16 +32,19 @@ int main() {
 
 	cout << "!! Regulations : 이용 규정 !!" << endl << endl;
 	cout << "타인의 영상 및 저작물을 허락 없이 다운로드 하여 활용하는 것은 금물입니다." << endl;
-	cout << "반드시 자신이 녹화한 영상 혹은 영상 및 맵 저작자가 허가한 맵 영상만을 활용해야 합니다." << endl;
+	cout << "반드시 자신이 직접 녹화한 영상 혹은 영상 저작자가 허가한 맵 영상만을 활용해야 합니다." << endl;
 	cout << "활용한 영상의 출처를 반드시 표기해야하며, 이를 위반하여 생기는 모든 책임은 이용자에게 있습니다." << endl;
+	cout << "기본적으로 맵의 재배포는 엄격히 금지되며, 맵 제작자와 영상 저작자 모두의 허락이 있을 시 재배포가 가능합니다." << endl;
 	cout << "이 프로그램의 사용으로 인해 저작권 혹은 그 외 권리 침해 문제가 발생할 시" << endl;
-	cout << "개발자의 권한으로 이 프로그램의 사용을 전면 금지 시킬 수 있습니다." << endl << endl;
+	cout << "개발자의 권한으로 이 프로그램의 사용을 무기한 금지 시킬 수 있습니다." << endl << endl;
 
-	cout << "Downloading and using other people's videos and works without permission is prohibited." << endl;
-	cout << "You must use only the video you recorded or the author's permission." << endl;
+	cout << "Downloading and using other people's videos and works without permission is not allowed." << endl;
+	cout << "You must use only the video that you recorded yourself or with the author's permission." << endl;
 	cout << "The source of the used video must be indicated, and the user is responsible for violating it." << endl;
+	cout << "By default, the redistribution of maps is strictly prohibited," << endl;
+	cout << "but it is possible with the permission of both map creators and video authors." << endl;
 	cout << "If the use of this program causes copyright or other problems," << endl;
-	cout << "the developer (CLiF) can prohibit the use of this program." << endl << endl;
+	cout << "the developer (CLiF) can indefinitely prohibit the use of this program." << endl << endl;
 
 	cout << "이용 규정을 반드시 읽고 다음으로 넘어가십시오." << endl;
 	cout << "Be sure to read the usage regulations and move on." << endl << endl;
@@ -140,8 +143,9 @@ int main() {
 	// Set Video
 	double delta_frame = game_start_frame - begin_frame;
 	double time_interval = delta_frame / ImageProcessing::video_fps * 1000;
-	vfx_adofai["settings"]["bgVideo"] = vfx_final_video_path;
-	vfx_adofai["settings"]["vidOffset"] = int(time_interval);
+	vfx_adofai["settings"]["bgVideo"] = "[VideoVFX] video.mp4";
+	vfx_adofai["settings"]["bgImage"] = "";
+	vfx_adofai["settings"]["vidOffset"] = int(time_interval / pitch);
 	vfx_adofai["settings"]["showDefaultBGIfNoImage"] = "Disabled";
 
 	cout << "> Saving ADOFAI File . . ." << endl;
