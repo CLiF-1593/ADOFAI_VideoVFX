@@ -8,6 +8,7 @@ If you find an error or want to request an additional function, please contact b
 (CLiF [클리프] #8404)   
 
 #### How to use : https://youtu.be/rX-034dQaiE   
+#### RightsRights Sheet : https://bristle-strand-cd3.notion.site/331da820415e48a68777c35575371d14?v=72fa0de39d874ad1a5d9017b56b41ddd
    
 프로그램 사용 시 출처를 밝혀주세요.   
 Please indicate the source when using this program.   
