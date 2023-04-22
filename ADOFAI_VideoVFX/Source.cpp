@@ -20,7 +20,7 @@ int main() {
 	cout << "Version : v1.0" << endl << endl;
 
 	cout << "이 프로그램은 얼불춤 이펙트를 영상으로 치환함으로써 플레이 경험을 증진시키기 위해 제작되었습니다." << endl;
-	cout << "This program was developed to improve the game-playing experience by change visual effects to video." << endl << endl;
+	cout << "This program was developed to improve the game-playing experience by changing visual effects to video." << endl << endl;
 	cout << "오류를 발견하시거나 추가 기능을 요청하시고 싶으시다면 디스코드 DM 부탁드립니다. (CLiF [클리프] #8404)" << endl;
 	cout << "If you find an error or want to request an additional function, please contact by Discord DM." << endl << endl;
 	system("pause");
