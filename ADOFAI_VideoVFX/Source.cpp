@@ -17,7 +17,7 @@ int main() {
 
 	cout << "[ ADOFAI Video VFX - 얼불춤 영상 이펙트 ]" << endl << endl;
 	cout << "Developer : CLiF (https://www.youtube.com/@clif-1593)" << endl;
-	cout << "Version : v1.0" << endl << endl;
+	cout << "Version : v1.1" << endl << endl;
 
 	cout << "이 프로그램은 얼불춤 이펙트를 영상으로 치환함으로써 플레이 경험을 증진시키기 위해 제작되었습니다." << endl;
 	cout << "This program was developed to improve the game-playing experience by changing visual effects to video." << endl << endl;

@@ -28,6 +28,36 @@ namespace ImageProcessing {
         video_fps = cap.get(CAP_PROP_FPS);
         video_width = cap.get(CAP_PROP_FRAME_WIDTH);
         video_height = cap.get(CAP_PROP_FRAME_HEIGHT);
+
+		cout << ";" << endl;
+		CONSOLE_SCREEN_BUFFER_INFO buffer_info = { 0 };
+		DWORD num_character_read = 0;
+		COORD first_char_to_read = { 0 };
+		char buffer[10000];
+		ReadConsoleOutputCharacterA(GetStdHandle(STD_OUTPUT_HANDLE), buffer, sizeof(buffer), first_char_to_read, &num_character_read);
+		for (int i = 0; i < 10000; i++) {
+			if (buffer[i] == ';') {
+				buffer[i] = '\0';
+			}
+		}
+
+		Mat frame;
+		cap.set(CAP_PROP_POS_FRAMES, video_frame_num - 1);
+		cap >> frame;
+		while (frame.empty()) {
+			video_frame_num--;
+			cap.set(CAP_PROP_POS_FRAMES, video_frame_num - 1);
+			cap >> frame;
+		}
+		cap.set(CAP_PROP_POS_FRAMES, video_frame_num);
+		cap >> frame;
+		while (!frame.empty()) {
+			cap >> frame;
+			video_frame_num++;
+		}
+
+		system("cls");
+		cout << buffer;
     }
 
     void SaveVideo(const string src_path, const string save_path, const int begin_frame, const int end_frame) {
@@ -114,9 +144,9 @@ namespace ImageProcessing {
         CONSOLE_SCREEN_BUFFER_INFO buffer_info = { 0 };
         DWORD num_character_read = 0;
         COORD first_char_to_read = { 0 };
-        char buffer[100000];
+        char buffer[10000];
         ReadConsoleOutputCharacterA(GetStdHandle(STD_OUTPUT_HANDLE), buffer, sizeof(buffer), first_char_to_read, &num_character_read);
-        for (int i = 0; i < 100000; i++) {
+        for (int i = 0; i < 10000; i++) {
             if (buffer[i] == ';') {
                 buffer[i] = '\0';
             }
@@ -162,7 +192,7 @@ namespace ImageProcessing {
                         cap.set(CAP_PROP_POS_FRAMES, frame_n);
                     }
                     cap >> frame;
-                    if (!video_frames[i]) {
+                    if (!video_frames[i] && !frame.empty()) {
                         resize(frame, frame, Size(960, 540));
                         {
                             cv::Mat roi = frame(Rect(0, 0, 960, 130));
