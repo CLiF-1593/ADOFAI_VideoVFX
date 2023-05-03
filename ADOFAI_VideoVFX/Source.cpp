@@ -17,7 +17,7 @@ int main() {
 
 	cout << "[ ADOFAI Video VFX - 얼불춤 영상 이펙트 ]" << endl << endl;
 	cout << "Developer : CLiF (https://www.youtube.com/@clif-1593)" << endl;
-	cout << "Version : v1.1" << endl << endl;
+	cout << "Version : v1.2" << endl << endl;
 
 	cout << "이 프로그램은 얼불춤 이펙트를 영상으로 치환함으로써 플레이 경험을 증진시키기 위해 제작되었습니다." << endl;
 	cout << "This program was developed to improve the game-playing experience by changing visual effects to video." << endl << endl;
@@ -131,7 +131,7 @@ int main() {
 	vfx_adofai["actions"].append(RemoveTile());
 	for (int i = 0; i < adofai["actions"].size(); i++) {
 		string name = adofai["actions"][i]["eventType"].asString();
-		if (name == "SetSpeed" || name == "Twirl" || name == "Pause" || name == "AutoPlayTiles" || name == "Checkpoint" || name == "SetHoldSound" || name == "MultiPlanet" || name == "ScaleMargin" || name == "FreeRoam" || name == "FreeRoamTwirl" || name == "FreeRoamRemove" || name == "SetHitsound" || name == "PlaySound") {
+		if (name == "SetSpeed" || name == "Twirl" || name == "Pause" || name == "AutoPlayTiles" || name == "Checkpoint" || name == "SetHoldSound" || name == "MultiPlanet" || name == "ScaleMargin" || name == "FreeRoam" || name == "FreeRoamTwirl" || name == "FreeRoamRemove" || name == "SetHitsound" || name == "PlaySound" || name == "Hold" || name == "SetHoldSound") {
 			vfx_adofai["actions"].append(adofai["actions"][i]);
 		}
 	}
