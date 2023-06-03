@@ -27,7 +27,7 @@ Copyright(C) 2023 by CLiF
       
 > Downloading and using other people's videos and works without permission is prohibited.     
 > You must use only the video that you recorded yourself or with the author's permission.      
-> The source of the used video must be indicated, and the user is responsible for violating it.     
+> The source of the used video must be credited, and the user is responsible for violating it.     
 > By default, the redistribution of maps is strictly prohibited,            
 > but it is possible with the permission of both map creators and video authors.            
 > If the use of this program causes copyright or other problems,      
